@@ -492,18 +492,17 @@ def card_number_check():
         if len(cardNumber) != 16 or not cardNumber.isdigit():
             print("Must be 16 digits")
             continue
-        cardNumber = list(cardNumber)
-        for i in range(0, len(cardNumber), 2):
+        total = 0
+        for i in range(len(cardNumber)):
             digit = int(cardNumber[i])
-            digit *= 2
-            if digit > 9:
-                digit -= 9
-            cardNumber[i] = str(digit)
-        sum = 0
-        for i in range(0, len(cardNumber)):
-            sum += int(cardNumber[i])
-        if sum % 10 == 0:
+            if i % 2 == 0:
+                digit *= 2
+                if digit > 9:
+                    digit -= 9
+            total += digit
+        if total % 10 == 0:
             print("Valid card number")
         else:
             print("Invalid card number")
+        break
 
